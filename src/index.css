@@ -1,0 +1,679 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800;900&display=swap');
+@import 'tailwindcss';
+
+:root {
+  --bg: #F4F0E8;
+  --card: #E7E3DB;
+  --card-2: #DDD8CF;
+  --text: #292B2B;
+  --muted: #767570;
+  --border: #D4CFC5;
+  --safe: #657B6B;
+  --caution: #E9A05D;
+  --risk: #DF7148;
+  --critical: #C94F35;
+  --orange: #E9783F;
+  --orange-light: #F6D6BF;
+  --orange-pale: #F2E3D4;
+  --warm-gray: #CBC8BF;
+  --warm-white: #FBF8F1;
+  --silver: #B8BBB8;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html, body, #root { min-height: 100%; background: var(--bg); }
+body { margin: 0; color: var(--text); }
+button { cursor: pointer; }
+.mono {
+  font-family: 'DM Mono', 'SF Mono', monospace !important;
+  letter-spacing: -0.045em;
+  font-variant-numeric: tabular-nums;
+}
+
+::-webkit-scrollbar { display: none; }
+* { scrollbar-width: none; }
+
+/* Motion stays functional but visually flat. */
+@keyframes bt-ring {
+  0% { transform: scale(.72); opacity: .62; }
+  100% { transform: scale(2.25); opacity: 0; }
+}
+.bt-r1 { animation: bt-ring 2.4s ease-out infinite; }
+.bt-r2 { animation: bt-ring 2.4s ease-out infinite .7s; }
+.bt-r3 { animation: bt-ring 2.4s ease-out infinite 1.4s; }
+
+@keyframes glove-alert {
+  0%,100% { opacity: 1; transform: scale(1); }
+  50% { opacity: .82; transform: scale(1.025); }
+}
+.glove-hi, .glove-crit, .airbag-inflate {
+  animation: glove-alert 1.35s ease-in-out infinite;
+  filter: none !important;
+}
+
+@keyframes scan {
+  0% { transform: translateY(0); opacity: 1; }
+  48% { opacity: 1; }
+  50% { transform: translateY(240px); opacity: 0; }
+  52% { transform: translateY(0); opacity: 0; }
+  54%,100% { opacity: 1; }
+}
+.scan-line { animation: scan 2.8s linear infinite; }
+
+@keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: .28; } }
+.blink { animation: blink 1.2s ease-in-out infinite; }
+
+@keyframes warning-flat {
+  0%,100% { background-color: var(--critical); }
+  50% { background-color: var(--risk); }
+}
+.warn-bg { animation: warning-flat 1.2s ease-in-out infinite; }
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fade-up .35s ease-out both; }
+
+@keyframes check-scale {
+  0% { transform: scale(.7); opacity: 0; }
+  65% { transform: scale(1.08); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.check-in { animation: check-scale .45s ease-out both; }
+
+/* Editorial flat foundation */
+.geometric-page {
+  background: var(--bg) !important;
+  color: var(--text);
+}
+
+.geometric-page::before {
+  content: '';
+  position: fixed;
+  top: 88px;
+  right: calc(50% - 215px);
+  width: 104px;
+  height: 52px;
+  border-radius: 104px 104px 0 0;
+  background: var(--orange-pale);
+  opacity: .9;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.geometric-page > * { position: relative; z-index: 1; }
+
+.geometric-stage,
+.geometric-temperature,
+.geo-card,
+.glass-card,
+.geo-accent-card,
+.home-hero {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: none !important;
+  border: 0 !important;
+}
+
+.geo-card,
+.glass-card,
+.geometric-temperature {
+  background: var(--card) !important;
+}
+
+.geo-accent-card {
+  background: var(--orange-light) !important;
+}
+
+.geometric-stage {
+  background: var(--warm-gray) !important;
+  overflow: hidden;
+}
+
+.geometric-stage::before,
+.home-hero::before {
+  content: '';
+  position: absolute;
+  width: 168px;
+  height: 168px;
+  border-radius: 50%;
+  background: var(--orange-light);
+  border: 0 !important;
+  top: -65px;
+  right: -54px;
+  left: auto;
+  transform: none;
+  pointer-events: none;
+}
+
+.geometric-stage::after,
+.home-hero::after {
+  content: '';
+  position: absolute;
+  width: 116px;
+  height: 58px;
+  border-radius: 116px 116px 0 0;
+  background: var(--warm-white);
+  left: -18px;
+  bottom: 0;
+  pointer-events: none;
+}
+
+.geometric-report {
+  background: #333534 !important;
+  border: 0 !important;
+  box-shadow: 9px 9px 0 var(--orange-light) !important;
+}
+
+.geo-section-kicker {
+  letter-spacing: .17em;
+  text-transform: uppercase;
+}
+
+.geo-primary {
+  background: #303231 !important;
+  color: #FFF !important;
+  border-radius: 999px !important;
+  box-shadow: none !important;
+}
+
+.geo-orange-primary {
+  background: var(--orange) !important;
+  color: #FFF !important;
+  border-radius: 999px !important;
+  box-shadow: none !important;
+}
+
+.glove-center-adjust { transform: translateX(-10px); }
+
+/* Strong editorial typography */
+h1, h2, h3 {
+  letter-spacing: -.045em !important;
+}
+h1 { font-weight: 800 !important; }
+h2, h3 { font-weight: 750 !important; }
+.text-\[10px\], .text-\[11px\], .text-xs {
+  letter-spacing: .035em;
+}
+
+/* Flat headers */
+.home-header,
+.geometric-page > .fixed.top-0,
+.geometric-page header {
+  background: var(--bg) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: 0 !important;
+}
+
+.home-header h1 {
+  font-size: 34px !important;
+  line-height: .98 !important;
+  max-width: 290px;
+}
+
+.home-hero {
+  background: var(--warm-gray) !important;
+  border-radius: 34px !important;
+  min-height: 540px;
+}
+
+.home-hero > div:first-child {
+  padding-top: 24px;
+}
+
+.hero-sketch {
+  width: min(82%, 306px);
+  height: auto;
+  object-fit: contain;
+  filter: none !important;
+}
+
+.home-hero .grid > div:nth-child(1) { background: var(--warm-white) !important; }
+.home-hero .grid > div:nth-child(2) { background: var(--orange-light) !important; }
+
+/* Cards form broad, calm blocks with editorial rhythm */
+.geometric-page .rounded-2xl,
+.geometric-page .rounded-\[20px\],
+.geometric-page .rounded-\[24px\],
+.geometric-page .rounded-\[28px\] {
+  border-radius: 26px !important;
+}
+
+.geometric-page [style*="var(--card)"] {
+  background: var(--card) !important;
+  border-color: transparent !important;
+}
+
+.geometric-page [style*="rgba(255,255,255"],
+.geometric-page [style*="rgba(255, 255, 255"] {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.geometric-page .grid.grid-cols-2 > .geo-card:nth-child(4n+1),
+.geometric-page .grid.grid-cols-2 > .glass-card:nth-child(4n+1) {
+  background: var(--orange-light) !important;
+}
+.geometric-page .grid.grid-cols-2 > .geo-card:nth-child(4n+2),
+.geometric-page .grid.grid-cols-2 > .glass-card:nth-child(4n+2) {
+  background: var(--warm-gray) !important;
+}
+.geometric-page .grid.grid-cols-2 > .geo-card:nth-child(4n+3),
+.geometric-page .grid.grid-cols-2 > .glass-card:nth-child(4n+3) {
+  background: var(--orange-pale) !important;
+}
+.geometric-page .grid.grid-cols-2 > .geo-card:nth-child(4n+4),
+.geometric-page .grid.grid-cols-2 > .glass-card:nth-child(4n+4) {
+  background: var(--card) !important;
+}
+
+/* Buttons and pills */
+.geometric-page button {
+  box-shadow: none !important;
+}
+.geometric-page button[style*="linear-gradient"] {
+  background: var(--orange) !important;
+  border-radius: 999px !important;
+}
+.geometric-page button[style*="var(--orange-light)"] {
+  background: var(--orange-light) !important;
+}
+.geometric-page .rounded-full {
+  box-shadow: none !important;
+}
+
+/* Charts: no translucent or gradient fills */
+.geometric-page svg linearGradient stop {
+  stop-opacity: .14;
+}
+
+/* Map becomes a warm editorial diagram */
+.geometric-page [style*="linear-gradient"][style*="#"] {
+  box-shadow: none !important;
+}
+.geometric-page svg text { font-family: 'Inter', sans-serif; }
+
+/* Fixed bottom navigation: flat continuous cream strip */
+nav[aria-label="Primary navigation"] {
+  background: #F9F5ED !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border-top: 1px solid var(--border) !important;
+  box-shadow: none !important;
+}
+nav[aria-label="Primary navigation"] button[aria-current="page"] {
+  background: var(--orange-light) !important;
+}
+nav[aria-label="Primary navigation"] button[aria-label="Report hot surface"] > span:first-child {
+  border-radius: 50% !important;
+  box-shadow: none !important;
+}
+
+/* Profile remains editorial and avoids emoji-led visual hierarchy */
+.geometric-page .grid.grid-cols-3 > div {
+  border: 0 !important;
+}
+.geometric-page .grid.grid-cols-3 > div:nth-child(1) { background: var(--orange-light) !important; }
+.geometric-page .grid.grid-cols-3 > div:nth-child(2) { background: var(--warm-gray) !important; }
+.geometric-page .grid.grid-cols-3 > div:nth-child(3) { background: var(--orange-pale) !important; }
+
+/* Critical warning: flat orange alert poster */
+.min-h-screen.flex.flex-col[style*="#301F22"] {
+  background: var(--critical) !important;
+}
+.min-h-screen.flex.flex-col[style*="#301F22"] [style*="radial-gradient"] {
+  background: var(--orange) !important;
+  opacity: .32 !important;
+}
+.min-h-screen.flex.flex-col[style*="#301F22"] [style*="rgba(255,255,255"] {
+  background: rgba(255,255,255,.14) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border-color: rgba(255,255,255,.38) !important;
+}
+.min-h-screen.flex.flex-col[style*="#301F22"] h1 {
+  font-size: 34px !important;
+  line-height: .95 !important;
+}
+
+/* Remove shadows, blur and decorative glow everywhere */
+.shadow-sm, .shadow-lg, .shadow-xl, .shadow-2xl {
+  box-shadow: none !important;
+}
+[class*="blur-"], [style*="filter: blur"] { filter: none !important; }
+
+/* Larger data is the primary hierarchy */
+.mono.text-2xl { font-size: 30px !important; line-height: 1 !important; }
+.mono.text-lg { font-size: 22px !important; line-height: 1.05 !important; }
+
+/* Responsive */
+@media (max-width: 360px) {
+  .hero-sketch { width: 80%; }
+  .home-header h1 { font-size: 30px !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bt-r1, .bt-r2, .bt-r3, .glove-hi, .glove-crit, .airbag-inflate,
+  .scan-line, .blink, .warn-bg, .fade-up, .check-in {
+    animation: none !important;
+  }
+}
+
+/* 2026 soft-instrument visual system — derived from the approved 8-screen board */
+:root {
+  --bg: #f6f0e8;
+  --card: #fffdf8;
+  --card-2: #f1ece3;
+  --text: #151716;
+  --muted: #686a65;
+  --border: rgba(71, 67, 58, .10);
+  --safe: #4f8248;
+  --caution: #df702f;
+  --risk: #d95138;
+  --critical: #cc3e35;
+  --orange: #efa347;
+  --orange-light: #f6c77f;
+  --orange-pale: #f8e5cd;
+  --warm-gray: #eee9df;
+  --warm-white: #fffdf8;
+  --sage: #dce8d0;
+  --sage-strong: #a8c692;
+  --peach: #f4d4c4;
+}
+
+html, body, #root {
+  background:
+    radial-gradient(circle at 12% 10%, rgba(239,163,71,.14) 0 9rem, transparent 9.1rem),
+    radial-gradient(circle at 90% 42%, rgba(151,177,126,.12) 0 11rem, transparent 11.1rem),
+    var(--bg);
+}
+
+body { font-weight: 450; }
+
+/* App frame: quiet ivory shell, no glass or heavy depth. */
+#root > div > div {
+  background: rgba(255,253,248,.96) !important;
+  box-shadow: 0 18px 56px rgba(57,47,33,.10) !important;
+}
+
+.geometric-page {
+  isolation: isolate;
+  background: var(--warm-white) !important;
+  overflow-x: hidden;
+}
+
+.geometric-page::before {
+  position: absolute;
+  inset: 52px -95px auto auto;
+  width: 260px;
+  height: 190px;
+  border-radius: 48% 0 0 62%;
+  background: var(--orange-pale);
+  opacity: .74;
+  transform: rotate(-9deg);
+}
+
+.geometric-page::after {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  top: 250px;
+  left: -120px;
+  width: 270px;
+  height: 210px;
+  border-radius: 0 58% 55% 0;
+  background: rgba(220,232,208,.70);
+  transform: rotate(8deg);
+  pointer-events: none;
+}
+
+.geometric-page > * { position: relative; z-index: 1; }
+
+/* Typography follows the board: compressed headlines, oversized data, calm copy. */
+h1, h2, h3 {
+  color: var(--text) !important;
+  letter-spacing: -.055em !important;
+  line-height: 1.02 !important;
+}
+h1 { font-weight: 850 !important; }
+.mono { letter-spacing: -.065em; }
+.mono.text-2xl { font-size: 32px !important; }
+.mono.text-lg { font-size: 23px !important; }
+
+/* Top bars become part of the page rather than floating glass panels. */
+.home-header,
+.geometric-page > .fixed.top-0,
+.geometric-page header {
+  background: rgba(255,253,248,.94) !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Broad organic hero fields establish safe/caution/critical context. */
+.home-hero,
+.geometric-stage,
+.geometric-temperature {
+  position: relative;
+  border: 0 !important;
+  overflow: hidden;
+  box-shadow: none !important;
+}
+
+.home-hero,
+.geometric-stage {
+  background: var(--orange-pale) !important;
+  border-radius: 42px 42px 30px 30px !important;
+}
+
+.geometric-temperature {
+  background: transparent !important;
+  border-radius: 0 !important;
+}
+
+.geometric-stage::before,
+.home-hero::before {
+  width: 230px;
+  height: 180px;
+  top: -74px;
+  right: -54px;
+  border-radius: 50% 15% 55% 45%;
+  background: rgba(255,253,248,.92);
+  transform: rotate(-12deg);
+}
+
+.geometric-stage::after,
+.home-hero::after {
+  width: 190px;
+  height: 98px;
+  left: -46px;
+  bottom: -24px;
+  border-radius: 52% 55% 0 0;
+  background: rgba(239,163,71,.52);
+  transform: rotate(7deg);
+}
+
+/* Flat cards: soft white surfaces, hairline boundaries and consistent radii. */
+.geo-card,
+.glass-card,
+.geo-accent-card {
+  background: rgba(255,253,248,.94) !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.geometric-page .rounded-2xl,
+.geometric-page .rounded-\[18px\],
+.geometric-page .rounded-\[20px\],
+.geometric-page .rounded-\[24px\],
+.geometric-page .rounded-\[26px\],
+.geometric-page .rounded-\[28px\] {
+  border-radius: 22px !important;
+}
+
+.geometric-page .grid.grid-cols-2 > .geo-card:nth-child(4n+1),
+.geometric-page .grid.grid-cols-2 > .glass-card:nth-child(4n+1) { background: #fffaf1 !important; }
+.geometric-page .grid.grid-cols-2 > .geo-card:nth-child(4n+2),
+.geometric-page .grid.grid-cols-2 > .glass-card:nth-child(4n+2) { background: #edf3e8 !important; }
+.geometric-page .grid.grid-cols-2 > .geo-card:nth-child(4n+3),
+.geometric-page .grid.grid-cols-2 > .glass-card:nth-child(4n+3) { background: #fae8df !important; }
+.geometric-page .grid.grid-cols-2 > .geo-card:nth-child(4n+4),
+.geometric-page .grid.grid-cols-2 > .glass-card:nth-child(4n+4) { background: #f2ede4 !important; }
+
+/* Primary actions use the reference's wide orange capsule and black arrow end-cap. */
+.geometric-page button[style*="linear-gradient"],
+.geo-orange-primary {
+  position: relative;
+  background: linear-gradient(90deg, #f0a446 0%, #f3b15d 100%) !important;
+  color: #161817 !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  box-shadow: none !important;
+}
+
+.geo-primary {
+  background: #1e211f !important;
+  color: #fff !important;
+  border-radius: 999px !important;
+}
+
+/* Glove is the product anchor: large, crisp and only lightly separated from the field. */
+.hero-sketch,
+.glove-center-adjust {
+  filter: drop-shadow(0 8px 10px rgba(26,27,25,.13)) !important;
+}
+.hero-sketch { width: min(88%, 326px); }
+
+/* Charts stay technical but visually restrained. */
+.geometric-page svg line { shape-rendering: geometricPrecision; }
+.geometric-page svg text { font-family: 'Inter', sans-serif; }
+.geometric-page svg linearGradient stop { stop-opacity: .12; }
+
+/* Report hero is no longer a dark card; it matches the board's soft instrument panel. */
+.geometric-report {
+  background: #f2ede4 !important;
+  color: var(--text) !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: none !important;
+}
+.geometric-report p,
+.geometric-report .text-white { color: var(--text) !important; }
+
+/* Critical state retains urgency through red, without turning into a dark neon screen. */
+.min-h-screen.flex.flex-col[style*="#301F22"] {
+  background: #faece6 !important;
+  color: var(--text) !important;
+}
+.min-h-screen.flex.flex-col[style*="#301F22"] [style*="radial-gradient"] {
+  background: #f2c9bd !important;
+  opacity: .72 !important;
+}
+.min-h-screen.flex.flex-col[style*="#301F22"] [style*="rgba(255,255,255"] {
+  background: rgba(255,253,248,.82) !important;
+  border: 1px solid rgba(204,62,53,.14) !important;
+}
+
+/* Navigation is a continuous warm-white dock with a clear orange center action. */
+nav[aria-label="Primary navigation"] {
+  background: rgba(255,253,248,.98) !important;
+  border-top: 1px solid var(--border) !important;
+  box-shadow: 0 -8px 24px rgba(59,49,37,.05) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+nav[aria-label="Primary navigation"] button[aria-current="page"] {
+  background: transparent !important;
+  color: var(--text) !important;
+}
+nav[aria-label="Primary navigation"] button[aria-label="Report hot surface"] > span:first-child {
+  background: var(--orange) !important;
+  border-radius: 50% !important;
+  box-shadow: 0 7px 15px rgba(222,133,42,.22) !important;
+}
+
+/* Remove all remaining glossy legacy effects. */
+.shadow-sm, .shadow-lg, .shadow-xl { box-shadow: none !important; }
+[class*="blur-"], [style*="filter: blur"] { filter: none !important; }
+
+@media (max-width: 430px) {
+  #root > div > div { box-shadow: none !important; }
+}
+
+/* Exact reference lock: preserve the supplied board's visual decisions. */
+:root {
+  --bg: #f5eee6;
+  --card: #fffdfa;
+  --text: #111311;
+  --muted: #62645f;
+  --border: rgba(36,38,34,.08);
+  --safe: #54884e;
+  --caution: #dc6b32;
+  --risk: #cf463b;
+  --critical: #ca3935;
+  --orange: #efa446;
+  --orange-light: #f2b866;
+  --orange-pale: #f5dec3;
+  --warm-gray: #f1ece4;
+  --warm-white: #fffdfa;
+}
+
+html, body, #root { background: #eee7de !important; }
+#root > div { background: #eee7de !important; }
+#root > div > div { background: #fffdfa !important; }
+
+.geometric-page {
+  background: #fffdfa !important;
+}
+.geometric-page::before {
+  width: 330px;
+  height: 220px;
+  top: 70px;
+  right: calc(50% - 305px);
+  border-radius: 48%;
+  background: #f5dec3;
+  transform: rotate(-10deg);
+  opacity: .86;
+}
+.geometric-page::after { background: rgba(220,232,208,.72); }
+
+.home-header h1 { font-size: 30px !important; line-height: 1.02 !important; }
+.home-hero,
+.geometric-stage { background: #f1b66d !important; border-radius: 0 0 62px 24px !important; }
+.geometric-stage::before,
+.home-hero::before { background: rgba(255,253,250,.95) !important; }
+.geometric-stage::after,
+.home-hero::after { background: #f2a44e !important; opacity: .72; }
+
+.geo-card,
+.glass-card,
+.geo-accent-card,
+.geometric-report { background: #fffdfa !important; border: 1px solid var(--border) !important; }
+
+.geometric-page button[style*="linear-gradient"],
+.geo-orange-primary { background: linear-gradient(90deg,#efa446,#f3b65f) !important; color:#111311 !important; }
+
+.hero-sketch,
+.glove-center-adjust { filter: drop-shadow(0 7px 7px rgba(27,25,22,.16)) !important; }
+
+nav[aria-label="Primary navigation"] {
+  height: 76px;
+  background: #fffdfa !important;
+  border-top: 1px solid #eee8de !important;
+  box-shadow: none !important;
+}
+nav[aria-label="Primary navigation"] button[aria-label="Report hot surface"] > span:first-child {
+  width: 46px !important;
+  height: 46px !important;
+  background: #efa446 !important;
+}

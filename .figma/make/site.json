@@ -1,0 +1,10 @@
+{
+  "description": "Enables public users to report hot surfaces via color-changing patches and outdoor workers to monitor heat risks with smart gloves, enhancing urban heat safety.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
